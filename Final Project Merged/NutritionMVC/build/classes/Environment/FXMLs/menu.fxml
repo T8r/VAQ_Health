@@ -18,9 +18,9 @@
                      <children>
                         <AnchorPane id="AnchorPane" fx:id="exerciseDisplayButton" prefHeight="590.0" prefWidth="1000.0" style="-fx-background-color: white;">
                            <children>
-                              <AnchorPane prefHeight="84.0" prefWidth="1000.0">
+                              <AnchorPane prefHeight="84.0" prefWidth="1000.0" styleClass="Header" stylesheets="@../../resources/css/Header.css">
                                  <children>
-                                    <AnchorPane layoutY="76.0" prefHeight="8.0" prefWidth="1000.0" style="-fx-background-color: orange;" />
+                                    <AnchorPane layoutY="76.0" prefHeight="8.0" prefWidth="1000.0" style="-fx-background-color: orange;" visible="false" />
                                     <Label layoutX="414.0" layoutY="17.0" text="Exercises" textFill="WHITE">
                                        <font>
                                           <Font name="Verdana" size="40.0" />
@@ -48,11 +48,6 @@
                               </ImageView>
                            </children>
                         </AnchorPane>
-                        <ImageView fx:id="backButton" fitHeight="55.0" fitWidth="86.0" layoutX="25.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../resources/images/menuIcons/BackArrow.png" />
-                           </image>
-                        </ImageView>
                      </children>
                   </AnchorPane>
                </children>

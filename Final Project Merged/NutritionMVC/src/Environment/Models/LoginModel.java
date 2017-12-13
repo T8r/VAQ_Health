@@ -620,6 +620,8 @@ public class LoginModel {
             exc.printStackTrace();
         }
     }
+    
+    
     public static WeeklyRoutine GetUserCurrentWeeklyRoutine(int userID) {
         WeeklyRoutine weeklyRoutine = new WeeklyRoutine();
 
@@ -637,6 +639,22 @@ public class LoginModel {
             exc.printStackTrace();
         }
         return weeklyRoutine;
+    }
+    
+    
+    
+     public static void CreateUserCurrentWeeklyRoutine(Profile profile) {
+        WeeklyRoutine weeklyRoutine = new WeeklyRoutine();
+        int allergyID = 0;
+        try {
+           String sql = "INSERT INTO currentWeeklyRoutine (userID) VALUES (?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, profile.id);
+            statement.executeUpdate();
+            
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
     }
 
     public static WeeklyRoutine GetWeeklyRoutine(int weeklyRoutineID)

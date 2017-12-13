@@ -16,7 +16,7 @@ public class Profile {
     public Personal personal = new Personal();
     public Medical medical = new Medical();
     public ExerciseProfile exerciseProfile = new ExerciseProfile();
-    public WeeklyRoutine currentWeeklyRoutine = null;
+    public WeeklyRoutine currentWeeklyRoutine = new WeeklyRoutine();
     public ArrayList<WeeklyRoutine> weeklyRoutineList = new ArrayList<>();
     public String username;
     public String password;

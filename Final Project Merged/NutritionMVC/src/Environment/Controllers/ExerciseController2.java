@@ -41,9 +41,7 @@ public class ExerciseController2 implements Initializable {
     private ImageView muscleMenuButton;
     @FXML
     private ImageView downB;
-    @FXML
-    private ImageView backButton;
-    
+      
     private MuscleMenuController muscleMenuController;
     private ExerciseSearchController exerciseSearchController;
     private ExerciseDisplayController exerciseDisplayController;
@@ -74,6 +72,7 @@ public class ExerciseController2 implements Initializable {
         try {
             loader = new FXMLLoader(getClass().getResource("/Environment/FXMLs/ExerciseSearch.fxml"));
             root = loader.load();
+            root.toBack();
         } catch (IOException ex) {
             Logger.getLogger(ExerciseController2.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -84,6 +83,7 @@ public class ExerciseController2 implements Initializable {
         try {
             loader = new FXMLLoader(getClass().getResource("/Environment/FXMLs/ExerciseDisplay.fxml"));
             root = loader.load();
+            root.toBack();
         } catch (IOException ex) {
             Logger.getLogger(ExerciseController2.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -93,16 +93,7 @@ public class ExerciseController2 implements Initializable {
     }
 
     private void SetHandlers() {
-        backButton.setOnMouseClicked(new EventHandler() {
-            @Override
-            public void handle(Event event) {
-                try {
-                    TabManager.setPage(FXMLLoader.load(this.getClass().getResource("/Environment/FXMLs/CreateAccount.fxml")));
-                } catch (IOException ex) {
-                    Logger.getLogger(ExerciseController2.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
+      
         downB.setOnMouseClicked(new EventHandler() {
             @Override
             public void handle(Event event) {
@@ -156,21 +147,22 @@ public class ExerciseController2 implements Initializable {
     
     public void SwapView(Node node1, Node node2, int x, int y)
     {
-        TranslateTransition tt = new TranslateTransition(Duration.millis(400), node1);
-        tt.setByX(1000f *x);
-        tt.setByY(1000f *y);
+        TranslateTransition tt = new TranslateTransition(Duration.millis(200), node1);
+        int distance = 100;
+        tt.setByX(distance *x);
+        tt.setByY(distance *y);
         tt.setCycleCount(1);
         tt.setAutoReverse(true);
-
+        
         tt.setOnFinished(new EventHandler() {
             @Override
             public void handle(Event event) {
                 SetContent(node2);
-                node2.translateXProperty().set(x*-1000f);
-                 node2.translateYProperty().set(y*-1000f);
-                TranslateTransition tt = new TranslateTransition(Duration.millis(300), node2);
-                tt.setByX(x*1010f);
-                tt.setByY(y*1010f);
+                node2.translateXProperty().set(x*-distance);
+                 node2.translateYProperty().set(y*-distance);
+                TranslateTransition tt = new TranslateTransition(Duration.millis(200), node2);
+                tt.setByX(x*(distance+10));
+                tt.setByY(y*(distance+10));
                 tt.setCycleCount(1);
                 tt.setAutoReverse(true);
                 tt.setOnFinished(new EventHandler() {
@@ -198,7 +190,10 @@ public class ExerciseController2 implements Initializable {
     }
     
         public Parent getView() throws IOException{
-           return FXMLLoader.load(this.getClass().getResource("/Environment/FXMLs/menu.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Environment/FXMLs/menu.fxml"));
+            Parent root = loader.load();
+            root.toBack();
+            return root;
        }
 
 }

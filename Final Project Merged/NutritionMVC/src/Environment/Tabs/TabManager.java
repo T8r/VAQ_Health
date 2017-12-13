@@ -68,7 +68,6 @@ public class TabManager extends HBox{
     public TabManager(BorderPane root) {
         mainMenuTemplate = new VBox();
         subMenuTemplate = new VBox();
-        
         drawMenu();
         
         this.getChildren().add(mainMenuTemplate);
@@ -127,7 +126,9 @@ public class TabManager extends HBox{
                 },
                 /*Routine*/
                 {
-                    {"Routines" ,"routinePage", exportTab.getView()},
+                    {"Home" ,"routinePage", routineTab.getView()},
+                    {"Creator" ,"routineCreator", routineCreatorTab.getView()},
+                    {"Manager" ,"routineManager", routineManagerTab.getView()}
                 },
                 /*About*/
                 {

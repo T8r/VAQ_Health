@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package RoutineHome.RoutineViewer;
+package Environment.Controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;

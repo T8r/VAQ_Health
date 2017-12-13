@@ -88,11 +88,9 @@ public class RoutineHomeController implements Initializable {
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
         currentDayL.setText(new SimpleDateFormat("EEEE", Locale.ENGLISH).format(date.getTime()));
-        UpdateProgressIndicators();
-       
+        UpdateProgressIndicators();      
         pieChartPane.getChildren().add(new RoutinePieChart(new ArrayList<ExerciseRoutine>(),300,300));
         UpdateCaloriesBurned();
-
     }
 
     @FXML
@@ -137,7 +135,7 @@ public class RoutineHomeController implements Initializable {
             try {
                 int nCompletedExercises = 0;
                 for (ExerciseRoutine exerciseRoutine : MainApplication.profile.currentWeeklyRoutine.saturday) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/RoutineExerciseSlot/RoutineExerciseSlot.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Environment/FXMLs/RoutineExerciseSlot.fxml"));
                     Parent root = loader.load();
                     RoutineExerciseSlotController controller = (RoutineExerciseSlotController) loader.getController();
                     controller.SetExercise(exerciseRoutine);
@@ -169,7 +167,7 @@ public class RoutineHomeController implements Initializable {
             try {
                 int nCompletedExercises = 0;
                 for (ExerciseRoutine exerciseRoutine : MainApplication.profile.currentWeeklyRoutine.friday) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/RoutineExerciseSlot/RoutineExerciseSlot.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Environment/FXMLs/RoutineExerciseSlot.fxml"));
                     Parent root = loader.load();
                     RoutineExerciseSlotController controller = (RoutineExerciseSlotController) loader.getController();
                     controller.SetExercise(exerciseRoutine);
@@ -201,7 +199,7 @@ public class RoutineHomeController implements Initializable {
             try {
                 int nCompletedExercises = 0;
                 for (ExerciseRoutine exerciseRoutine : MainApplication.profile.currentWeeklyRoutine.thursday) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/RoutineExerciseSlot/RoutineExerciseSlot.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Environment/FXMLs/RoutineExerciseSlot.fxml"));
                     Parent root = loader.load();
                     RoutineExerciseSlotController controller = (RoutineExerciseSlotController) loader.getController();
                     controller.SetExercise(exerciseRoutine);
@@ -233,7 +231,7 @@ public class RoutineHomeController implements Initializable {
             try {
                 int nCompletedExercises = 0;
                 for (ExerciseRoutine exerciseRoutine : MainApplication.profile.currentWeeklyRoutine.wednesday) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/RoutineExerciseSlot/RoutineExerciseSlot.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Environment/FXMLs/RoutineExerciseSlot.fxml"));
                     Parent root = loader.load();
                     RoutineExerciseSlotController controller = (RoutineExerciseSlotController) loader.getController();
                     controller.SetExercise(exerciseRoutine);
@@ -265,7 +263,7 @@ public class RoutineHomeController implements Initializable {
             try {
                 int nCompletedExercises = 0;
                 for (ExerciseRoutine exerciseRoutine : MainApplication.profile.currentWeeklyRoutine.tuesday) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/RoutineExerciseSlot/RoutineExerciseSlot.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Environment/FXMLs/RoutineExerciseSlot.fxml"));
                     Parent root = loader.load();
                     RoutineExerciseSlotController controller = (RoutineExerciseSlotController) loader.getController();
                     controller.SetExercise(exerciseRoutine);
@@ -297,7 +295,7 @@ public class RoutineHomeController implements Initializable {
             try {
                 int nCompletedExercises = 0;
                 for (ExerciseRoutine exerciseRoutine : MainApplication.profile.currentWeeklyRoutine.monday) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/RoutineExerciseSlot/RoutineExerciseSlot.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Environment/FXMLs/RoutineExerciseSlot.fxml"));
                     Parent root = loader.load();
                     RoutineExerciseSlotController controller = (RoutineExerciseSlotController) loader.getController();
                     controller.SetExercise(exerciseRoutine);
@@ -331,12 +329,12 @@ public class RoutineHomeController implements Initializable {
 
     @FXML
     private void OpenCreator() throws IOException {
-        TabManager.setPage(FXMLLoader.load(this.getClass().getResource("/Environment/FXMLs/CreateAccount.fxml")));
+        TabManager.setPage(FXMLLoader.load(this.getClass().getResource("/Environment/FXMLs/RoutineCreator.fxml")));
     }
 
     @FXML
     private void OpenManager() throws IOException {
-        TabManager.setPage(FXMLLoader.load(this.getClass().getResource("/Environment/FXMLs/CreateAccount.fxml")));
+        TabManager.setPage(FXMLLoader.load(this.getClass().getResource("/Environment/FXMLs/RoutineManager.fxml")));
     }
 
     private void UpdateProgressIndicators() {

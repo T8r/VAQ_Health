@@ -6,8 +6,6 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.Blend?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
@@ -16,7 +14,7 @@
    <children>
       <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0">
          <children>
-            <AnchorPane prefHeight="84.0" prefWidth="1000.0" styleClass="Header">
+            <AnchorPane prefHeight="84.0" prefWidth="1000.0" styleClass="Header" stylesheets="@../../resources/css/OB11142017-diet.css">
                <children>
                   <AnchorPane layoutY="76.0" prefHeight="8.0" prefWidth="2000.0" style="-fx-background-color: orange;" />
                   <Label layoutX="425.0" layoutY="17.0" text="Medical" textFill="WHITE">

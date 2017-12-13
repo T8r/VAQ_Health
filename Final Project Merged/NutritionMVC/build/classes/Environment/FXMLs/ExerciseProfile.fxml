@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -15,7 +14,7 @@
          <children>
             <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0">
                <children>
-                  <AnchorPane prefHeight="84.0" prefWidth="1000.0" styleClass="Header">
+                  <AnchorPane prefHeight="84.0" prefWidth="1000.0" styleClass="Header" stylesheets="@../../resources/css/Header.css">
                      <children>
                         <AnchorPane layoutY="76.0" prefHeight="8.0" prefWidth="2000.0" style="-fx-background-color: orange;" />
                         <Label layoutX="417.0" layoutY="17.0" text="Exercise" textFill="WHITE">

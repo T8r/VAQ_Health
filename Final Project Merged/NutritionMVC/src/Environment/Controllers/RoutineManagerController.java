@@ -16,6 +16,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -69,5 +70,8 @@ public class RoutineManagerController implements Initializable {
     private void OpenCreate() throws IOException
     {
        TabManager.setPage(FXMLLoader.load(this.getClass().getResource("/Environment/FXMLs/CreateAccount.fxml")));
+    }
+     public Parent getView() throws IOException{
+        return FXMLLoader.load(this.getClass().getResource("/Environment/FXMLs/RoutineManager.fxml"));
     }
 }
