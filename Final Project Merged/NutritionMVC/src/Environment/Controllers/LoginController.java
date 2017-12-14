@@ -66,7 +66,6 @@ public class LoginController implements Initializable {
     private void RetreiveProfile() {
         MainApplication.profile = Model.GetProfile(usernameTF.getText());
         MainApplication.profile.logged = true;
-        TabManager.drawMenu();
         MainApplication.profile.username = usernameTF.getText();
         MainApplication.profile.password = password;
         MainApplication.profile.weeklyRoutineList = Model.GetUserWeeklyRoutines(MainApplication.profile.id);
@@ -76,6 +75,8 @@ public class LoginController implements Initializable {
                 System.out.println(er.exercise);
             });
         });
+        TabManager.drawMenu();
+
     }
 
     public Parent getView() throws IOException{

@@ -182,12 +182,32 @@ public class LoginModel {
                 newExercise.setMuscleTypeE(MuscleTypeE.valueOf(myRs.getString("primaryMuscle")));
                 newExercise.setMet(myRs.getDouble("met"));
                 newExercise.setEquipment(GetEquipment(myRs.getInt("equipmentID")));
-                Blob blob = myRs.getBlob("image");
-                if (blob != null)
-                {
-                    byte[] byteImage = blob.getBytes(1, (int) blob.length());
-                    newExercise.setImage(new Image(new ByteArrayInputStream(byteImage),150,100,false,false));
-                }
+                String imageFileName = "";
+                imageFileName = myRs.getString("image");
+                String exerciseType ="";
+                if ((newExercise.getType().equals(ExerciseTypeE.STRENGTH)))
+                        exerciseType = "Strength";
+                else  if ((newExercise.getType().equals(ExerciseTypeE.CARDIO)))
+                        exerciseType = "Cardio";
+                 else  if ((newExercise.getType().equals(ExerciseTypeE.BALANCE)))
+                        exerciseType = "Balance";
+                 else  if ((newExercise.getType().equals(ExerciseTypeE.FLEXIBILITY)))
+                        exerciseType = "Flexibility";
+                System.out.println(imageFileName);
+                newExercise.setImage(new Image("resources/images/"+exerciseType+"/"+imageFileName));
+                
+//                if (!imageFileName.equals(""))
+//                {
+//                    String filePath = "resources/images/Exercises/"+newExercise.getType().toString()+"/"+imageFileName;
+//                    newExercise.setImage(new Image("images/Exercises/STRENGTH/Abdominal-crunch.jpg"));
+//                }
+//                if ()
+//                Blob blob = myRs.getBlob("image");
+//                if (blob != null)
+//                {
+//                    byte[] byteImage = blob.getBytes(1, (int) blob.length());
+//                    newExercise.setImage(new Image(new ByteArrayInputStream(byteImage),150,100,false,false));
+//                }
                 exerciseList.add(newExercise);
             }
 

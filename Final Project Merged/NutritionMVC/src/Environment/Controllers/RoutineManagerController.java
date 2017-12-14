@@ -42,11 +42,11 @@ public class RoutineManagerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-        for (WeeklyRoutine weeklyRoutine : MainApplication.profile.weeklyRoutineList)
-        {
+        routineCB.getItems().clear();
+        for (WeeklyRoutine weeklyRoutine : MainApplication.profile.weeklyRoutineList) {
             routineCB.getItems().add(weeklyRoutine);
-        }
-         
+         }
+       
         saveButton.setOnAction(new EventHandler() {
             @Override
             public void handle(Event event) {
