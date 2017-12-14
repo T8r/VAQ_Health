@@ -6,6 +6,7 @@
 package Environment.Controllers;
 
 import Environment.Classes.Exercise;
+import Environment.MainApplication;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -43,7 +44,11 @@ public class ExerciseDisplayController implements Initializable {
         metL.setText("MET : " + Double.toString(exercise.getMet()));
         descriptionTF.setText(exercise.getDescription());
         imageView.setImage(exercise.getImage());
+       
+        String caloriesBurned = Double.toString(Exercise.CaloriesBurned((double)exercise.getMet(), 10,  (double)Integer.parseInt(MainApplication.profile.medical.getWeight())));
         primaryMuscleL.setText("Primary Muscle : " + exercise.getMuscleTypeE().toString());
+        typeL.setText("Type : " +exercise.getType().toString()+ "\nExpected Calories to Burn : " + caloriesBurned);
+        
     }
 
     /**

@@ -12,7 +12,6 @@ package Environment.Classes;
 public class Food {
     private int id;
     private String name;
-    private double servingsize;
     private int groupId;
     private String image;
     private double calories = 0;
@@ -23,10 +22,9 @@ public class Food {
     private double carbohydrates = 0;
     private double proteins = 0;
     
-    public Food(int id, String name, double servingsize ,int groupId, String image, double calories, double fats, double cholesterol, double sodium, double potassium, double carbohydrates, double proteins){
+    public Food(int id, String name, int groupId, String image, double calories, double fats, double cholesterol, double sodium, double potassium, double carbohydrates, double proteins){
         this.id = id;
         this.name = name;
-        this.servingsize = servingsize;
         this.groupId = groupId;
         this.image = image;
         this.calories = calories;
@@ -38,20 +36,11 @@ public class Food {
         this.proteins = proteins;
     }
     
-    public Food(int id, String name, double servingsize, int groupId, String image){
+    public Food(int id, String name, int groupId, String image){
         this.id = id;
         this.name = name;
-        this.servingsize = servingsize;
         this.groupId = groupId;
         this.image = image;
-    }
-
-    public Food() {
-        this.id = -1;
-        this.name = "Unknown";
-        this.servingsize = 0;
-        this.groupId = -1;
-        this.image = "Undefined";
     }
 
     /**
@@ -66,20 +55,6 @@ public class Food {
      */
     public void setId(int id) {
         this.id = id;
-    }
-    
-       /**
-     * @return the servingsize
-     */
-    public double getServingSize() {
-        return servingsize;
-    }
-
-    /**
-     * @param servingsize
-     */
-    public void setServingSize(double servingsize) {
-        this.servingsize = servingsize;
     }
 
     /**

@@ -45,9 +45,7 @@ public class AllNutrientsView extends BorderPane{
     private Button buttonBack = new Button("Go Back");
     private Button buttonBack2 = new Button("Go Back");
     
-    private Food foodPicked = new Food();
-    
-    private Button addFood = new Button("Add to my List");
+    private Food foodPicked;
     
     public AllNutrientsView() {
         
@@ -250,12 +248,15 @@ public class AllNutrientsView extends BorderPane{
 
             Button details = new Button("See More");
             details.setId("itemDetailsButton");
+            Button add = new Button("Add Portion");
+            add.setId("itemAddButton");
             
             details.setOnAction((ActionEvent event) -> {
                 updateFoodDetails(food, f);
             });
 
             itemOptions.getChildren().add(details);
+            itemOptions.getChildren().add(add);
 
             itemInfo.getChildren().add(itemName);
             itemInfo.getChildren().add(itemData);
@@ -272,7 +273,6 @@ public class AllNutrientsView extends BorderPane{
     }
     
     public void drawFoodDetails(Food f, FoodGroup fg){
-        foodPicked = f;
         HBox GlobalDetails = new HBox();
         GlobalDetails.setId("globalDetails");
         
@@ -447,12 +447,17 @@ public class AllNutrientsView extends BorderPane{
         
         TextField caloriesPerPortionUnit  = new TextField();
         
-        getAddFood().setId("addFoodButton");
+        Button addFood = new Button("Add to my List");
+        addFood.setId("addFoodButton");
+        
+        addFood.setOnAction((ActionEvent event) -> {
+                foodPicked = f;
+            });
         
         FoodPlateGrid.addRow(0, CaloriesPortionL, CaloriesPortionAL);
         FoodPlateGrid.addRow(1, portionL, portionSlider);
         FoodPlateGrid.addRow(2, portionCalL, caloriesPerPortionUnit);
-        FoodPlateGrid.addRow(3, getAddFood());
+        FoodPlateGrid.addRow(3, addFood);
         
         FoodPlate.getChildren().add(FoodPlateTitle);
         FoodPlate.getChildren().add(FoodPlateGrid);
@@ -543,12 +548,5 @@ public class AllNutrientsView extends BorderPane{
      */
     public void setFoodsPicked(Food foodsPicked) {
         this.foodPicked = foodsPicked;
-    }
-
-    /**
-     * @return the addFood
-     */
-    public Button getAddFood() {
-        return addFood;
     }
 }

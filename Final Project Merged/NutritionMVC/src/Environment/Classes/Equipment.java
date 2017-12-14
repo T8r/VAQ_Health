@@ -67,6 +67,8 @@ public class Equipment {
 
     public Equipment() {
         this.name = "None";
+        this.primaryMuscle = "None";
+        this.secondaryMuscle = "None";
     }
 
 
@@ -112,11 +114,15 @@ public class Equipment {
     public Equipment(String n,ExerciseTypeE e)
     {
         this.name = n;
+        this.secondaryMuscle = "None";
+        this.primaryMuscle = "None";
         type = e;
     }
     public Equipment(String n)
     {
         this.name = n;
+        this.secondaryMuscle = "None";
+        this.primaryMuscle = "None";
     }
     
        @Override

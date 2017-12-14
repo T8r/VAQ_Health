@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/dark_/Desktop/Final/VAQ_Health-master1/Final%20Project%20Merged/NutritionMVC/src/Environment/Models/CalorieModel.java</file>
-            <file>file:/C:/Users/dark_/Desktop/Final/VAQ_Health-master1/Final%20Project%20Merged/NutritionMVC/src/Environment/Controllers/CalorieController.java</file>
-            <file>file:/C:/Users/dark_/Desktop/Final/VAQ_Health-master1/Final%20Project%20Merged/NutritionMVC/src/Environment/Tabs/TabManager.java</file>
-            <file>file:/C:/Users/dark_/Desktop/Final/VAQ_Health-master1/Final%20Project%20Merged/NutritionMVC/src/Environment/Controllers/SearchController.java</file>
-            <file>file:/C:/Users/dark_/Desktop/Final/VAQ_Health-master1/Final%20Project%20Merged/NutritionMVC/src/Environment/Views/CalorieView.java</file>
-            <file>file:/C:/Users/dark_/Desktop/Final/VAQ_Health-master1/Final%20Project%20Merged/NutritionMVC/src/Environment/Classes/Food.java</file>
-            <file>file:/C:/Users/dark_/Desktop/Final/VAQ_Health-master1/Final%20Project%20Merged/NutritionMVC/src/Environment/Models/SearchModel.java</file>
-            <file>file:/C:/Users/dark_/Desktop/Final/VAQ_Health-master1/Final%20Project%20Merged/NutritionMVC/src/Environment/Views/SearchView.java</file>
+            <file>file:/C:/Users/Ghost/Downloads/SoftwareEngineeringFall2017Team2-master/SoftwareEngineeringFall2017Team2-master/Final%20Project%20Merged/NutritionMVC/src/Environment/Models/LoginModel.java</file>
+            <file>file:/C:/Users/Ghost/Downloads/SoftwareEngineeringFall2017Team2-master/SoftwareEngineeringFall2017Team2-master/Final%20Project%20Merged/NutritionMVC/src/Environment/Classes/Equipment.java</file>
+            <file>file:/C:/Users/Ghost/Downloads/SoftwareEngineeringFall2017Team2-master/SoftwareEngineeringFall2017Team2-master/Final%20Project%20Merged/NutritionMVC/src/Environment/Controllers/LoginController.java</file>
+            <file>file:/C:/Users/Ghost/Downloads/SoftwareEngineeringFall2017Team2-master/SoftwareEngineeringFall2017Team2-master/Final%20Project%20Merged/NutritionMVC/src/Environment/Controllers/ExerciseProfileController.java</file>
+            <file>file:/C:/Users/Ghost/Downloads/SoftwareEngineeringFall2017Team2-master/SoftwareEngineeringFall2017Team2-master/Final%20Project%20Merged/NutritionMVC/src/Environment/Controllers/ExerciseController.java</file>
         </group>
     </open-files>
 </project-private>

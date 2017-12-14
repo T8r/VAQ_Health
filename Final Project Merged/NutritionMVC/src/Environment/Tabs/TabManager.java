@@ -18,7 +18,6 @@ import Environment.Controllers.PersonalController;
 import Environment.Controllers.RoutineController;
 import Environment.Controllers.RoutineHomeController;
 import Environment.Controllers.RoutineManagerController;
-import Environment.Controllers.SearchController;
 import Environment.MainApplication;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -57,7 +56,6 @@ public class TabManager extends HBox{
     public static PersonalController personalTab = new PersonalController();
     public static ExerciseProfileController exerciseProfileTab = new ExerciseProfileController();
     public static ExportController exportTab = new ExportController();
-    public static SearchController searchTab = new SearchController();
     
     public static Object[][][] subMenus;
     
@@ -120,7 +118,6 @@ public class TabManager extends HBox{
                 /*Diet*/
                 {
                     {"All Foods" ,"allfoodsPage", AllNutrients.getView()},
-                    {"Search" ,"searchPage", searchTab.getView()},
                     {"Calorie Calculator" ,"caloriecalPage", CalorieCalculator.getView()},
                 },
                 /*Exercise*/
@@ -228,7 +225,6 @@ public class TabManager extends HBox{
     public static class loadCenter implements EventHandler<ActionEvent> {
        @Override
        public void handle(ActionEvent event) {
-           myItems.attachEvents();
            for(SubMenuTab s : TabsMap.get(currentMenu))
                if(event.getSource().equals(s.getButton()))
                    loadContent(s);

@@ -2,11 +2,9 @@ package Environment.Controllers;
 
 import Environment.Classes.Food;
 import Environment.Classes.FoodGroup;
-import Environment.MainApplication;
 import Environment.Models.AllNutrientsModel;
 import Environment.Views.AllNutrientsView;
 import java.util.ArrayList;
-import javafx.event.ActionEvent;
 
 public class AllNutrientsController {
     private AllNutrientsView View;
@@ -25,7 +23,7 @@ public class AllNutrientsController {
         handleretrieveFoodGroups();
     }
     
-    public void handleretrieveFoodGroups()
+    void handleretrieveFoodGroups()
     {
         ArrayList<FoodGroup> foodGroups = AllNutrientsModel.retrieveAllGroups();
         
@@ -38,10 +36,7 @@ public class AllNutrientsController {
         View.setTotalGroups(totalGroups);
         View.setTotalFoods(totalFoods);
         
-        View.getAddFood().addEventHandler(ActionEvent.ACTION, (e)-> {
-            Model.addFoodtoList(MainApplication.profile.id, View.getFoodsPicked().getId(), 1.3);
-        });
-        
+        View.getFoodsPicked();
         
         
         View.updateView();

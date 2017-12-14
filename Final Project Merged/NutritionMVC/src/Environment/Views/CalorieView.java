@@ -6,7 +6,6 @@
 package Environment.Views;
 
 import Environment.Classes.Category;
-import Environment.Classes.Food;
 import Environment.Classes.Nutrient;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -70,7 +69,7 @@ public class CalorieView extends VBox{
 
      //Plate & current food selection
      private ObservableList<Category> foodCategories = FXCollections.observableArrayList();
-     private Food currentNutrient;
+     private Nutrient currentNutrient;
      
     HBox buttonsBox = new HBox();
     private ToggleGroup plateDisplaygroup = new ToggleGroup();
@@ -79,16 +78,17 @@ public class CalorieView extends VBox{
     public CalorieView() 
     {
 	//set insets
-        this.setPadding(new Insets(20, 10, 10, 10));
+        this.setPadding(new Insets(0, 10, 10, 10));
         this.setBorder(new Border(new BorderStroke(Color.NAVY, BorderStrokeStyle.SOLID, new CornerRadii(3), new BorderWidths(5))));
         
 	// Categories Panel
-	Font myFont = Font.font("Verdana", FontPosture.ITALIC, 32);
+	Font myFont = Font.font("Verdana", FontWeight.BOLD, 62);
         label1.setFont(myFont);
-        label1.setTextFill(Color.RED);
-        label1.setWrapText(true);
+        label1.setTextFill(Color.WHITE);
+        //label1.setWrapText(true);
 	VBox vblabel = new VBox();
-	vblabel.setAlignment(Pos.BASELINE_CENTER);
+	vblabel.setAlignment(Pos.CENTER);
+        vblabel.setStyle("-fx-background-color: #cc7000;");
 	vblabel.getChildren().addAll(label1);
 	
 	myFont = Font.font("Verdana", FontPosture.ITALIC, 30);
@@ -102,13 +102,14 @@ public class CalorieView extends VBox{
 	
 	// Need Drop Down List
 	foodCategories.clear();
+        //"Grains" "Vegetables & fruits" "Dairy" "Meats" "Fats, spreads and oils" "Foods and drinks high in fat"
 	// Get & populate from database
-	foodCategories.add( new Category(1,"Vegetables",0));
-	foodCategories.add( new Category(2,"Wholemeal",0));
-	foodCategories.add( new Category(3,"Milk",0));
-	foodCategories.add( new Category(4,"Meat",0));
-	foodCategories.add( new Category(5,"Fats",0 ));
-	foodCategories.add( new Category(5,"Junk",0 ));
+	foodCategories.add( new Category("1","Vegetables & fruits",0));
+        foodCategories.add( new Category("2","Grains-Breads",0));
+	foodCategories.add( new Category("3","Dairy",0));
+        foodCategories.add( new Category("4","Meats",0));
+	foodCategories.add( new Category("5","Fats, spreads and oils",0));
+	foodCategories.add( new Category("6","Foods and drinks high in fat",0 ));
         categoriesComboBox.getItems().addAll(foodCategories);
 	categoriesComboBox.setPromptText("Food Categories");
 	
@@ -188,12 +189,12 @@ public class CalorieView extends VBox{
         categoryChoices.getItems().addAll("");
 
 	// Get & populate from database
-	foodCategories.add( new Category(1,"Vegetables",0));
-	foodCategories.add( new Category(2,"Wholemeal",0));
-	foodCategories.add( new Category(3,"Milk",0));
-	foodCategories.add( new Category(4,"Meat",0));
-	foodCategories.add( new Category(5,"Fats",0 ));
-	foodCategories.add( new Category(5,"Junk",0 ));
+	foodCategories.add( new Category("1","Vegetables & fruits",0));
+        foodCategories.add( new Category("2","Grains-Breads",0));
+	foodCategories.add( new Category("3","Dairy",0));
+        foodCategories.add( new Category("4","Meats",0));
+	foodCategories.add( new Category("5","Fats, spreads and oils",0));
+	foodCategories.add( new Category("6","Foods and drinks high in fat",0 ));
         
         categoriesComboBox.getItems().clear();
         categoriesComboBox.getItems().addAll(foodCategories);
@@ -220,7 +221,7 @@ public class CalorieView extends VBox{
        //caloriesPerPortionUnit.setText("");
        plateChart.getData().clear();
        plateChart.setData(pieData);  
-       int total=0;
+       double total = 0.0;
        for (PieChart.Data d : plateChart.getData())
        {
              total += d.getPieValue();
@@ -230,10 +231,10 @@ public class CalorieView extends VBox{
                         data.getName(), " ", data.pieValueProperty(), " Cals"
                 )
         ) );
-       plateChart.setTitle("Total Calories: "+ Integer.toString(total));
+       plateChart.setTitle("Total Calories: "+ Double.toString(total));
     }
     
-    public void reDrawCalorieView2(ObservableList<Food> selectedCatChoices) 
+    public void reDrawCalorieView2(ObservableList<Nutrient> selectedCatChoices) 
     {
         getCategoryChoices().getItems().clear();
         caloriesPerPortionUnit.setText("");
@@ -243,16 +244,16 @@ public class CalorieView extends VBox{
         getCategoryChoices().getItems().addAll(selectedCatChoices);
     }
     
-    public void reDrawCalorieView3(Food selectedNutrient) 
+    public void reDrawCalorieView3(Nutrient selectedNutrient) 
     {
         // TextField caloriesPerPortionUnit  = new TextField();
         // TextField portion  = new TextField();
         
         setCurrentNutrient(selectedNutrient);
-        String unit=selectedNutrient.getName();
-        String basePortion  = Double.toString(selectedNutrient.getServingSize());
-        String baseCalories = Double.toString(selectedNutrient.getCalories());
-        portionSlider.setValue((int)selectedNutrient.getServingSize());
+        String unit=selectedNutrient.getServinUnit();
+        String basePortion  = Double.toString(selectedNutrient.getBasePortion());
+        String baseCalories = Double.toString(selectedNutrient.getBaseCalories());
+        portionSlider.setValue((int)selectedNutrient.getBasePortion());
         String caloriesPerPortionUnitString =baseCalories+" Cals per "+basePortion+" "+unit;
 
         caloriesPerPortionUnit.setText(caloriesPerPortionUnitString);
@@ -264,7 +265,7 @@ public class CalorieView extends VBox{
 	//start at the base unit
         getPortion().setText(basePortion);
         //stat at base calories
-        getTotalCalories().setText(Double.toString(selectedNutrient.getCalories()));
+        getTotalCalories().setText(Double.toString(selectedNutrient.getBaseCalories()));
         // update currentNutrient as the userr changes portions
     }
     
@@ -279,11 +280,12 @@ public class CalorieView extends VBox{
         this.setBorder(new Border(new BorderStroke(Color.NAVY, BorderStrokeStyle.SOLID, new CornerRadii(3), new BorderWidths(5))));
         
 	// Categories Panel
-	Font myFont = Font.font("Verdana", FontPosture.ITALIC, 32);
+	Font myFont = Font.font("Verdana", FontWeight.BOLD, 62);
         label1.setFont(myFont);
-        label1.setTextFill(Color.RED);
+        label1.setTextFill(Color.WHITE);
         label1.setWrapText(true);
 	VBox vblabel = new VBox();
+        vblabel.setStyle("-fx-background-color: #cc7000;");
 	vblabel.setAlignment(Pos.BASELINE_CENTER);
 	vblabel.getChildren().addAll(label1);
 	
@@ -339,15 +341,28 @@ public class CalorieView extends VBox{
 	this.getChildren().addAll(vblabel, label2,nutrientGrid,separator2,plateChart);
     }
     
+    /*
+    "1","Vegetables & fruits",0));
+        foodCategories.add( new Category("2","Grains-Breads",0));
+	foodCategories.add( new Category("3","Dairy",0));
+        foodCategories.add( new Category("4","Meats",0));
+	foodCategories.add( new Category("5","Fats, spreads and oils",0));
+	foodCategories.add( new Category("6","Foods and drinks high in fat"
+    */
+    
+    //"Grains" "Vegetables & fruits" "Dairy" "Meats" "Fats, spreads and oils" "Foods and drinks high in fat"
+   
     public ObservableList<PieChart.Data> getChartData() 
     {
         // Get from an SQL or File or whateer....
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
-                new PieChart.Data("Category-01", 1),
-                new PieChart.Data("Category-02", 1),
-	        new PieChart.Data("Category-03", 1),
-                new PieChart.Data("Category-04", 1));
+                new PieChart.Data("Vegtables & fruits-01", 1),
+                new PieChart.Data("Grains-02", 1),
+	        new PieChart.Data("Dairy-03", 1),
+                new PieChart.Data("Meats-04", 1),
+                new PieChart.Data("Fats & oils-05", 1),
+                new PieChart.Data("High in Fat-06", 1));
                 return pieChartData;
     }
     
@@ -404,14 +419,14 @@ public class CalorieView extends VBox{
     /**
      * @return the currentNutrient
      */
-    public Food getCurrentNutrient() {
+    public Nutrient getCurrentNutrient() {
         return currentNutrient;
     }
 
     /**
      * @param currentNutrient the currentNutrient to set
      */
-    public void setCurrentNutrient(Food currentNutrient) {
+    public void setCurrentNutrient(Nutrient currentNutrient) {
         this.currentNutrient = currentNutrient;
     }
 

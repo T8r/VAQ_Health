@@ -407,10 +407,10 @@ public class LoginModel {
             ps.setString(5, profile.personal.getState());
             ps.setString(6, profile.personal.getZipCode());
             ps.setString(7, profile.personal.getSex());
-            if (tools.isValidDate(profile.personal.getBirthday().toString())) {
+            if ( profile.personal.getBirthday() != null && tools.isValidDate(profile.personal.getBirthday().toString())) {
                 ps.setDate(8, profile.personal.getBirthday());
             } else {
-                ps.setDate(9, java.sql.Date.valueOf("2000-01-01"));
+                ps.setDate(8, java.sql.Date.valueOf("2000-01-01"));
             }
             ps.executeUpdate();
             ps.close();
