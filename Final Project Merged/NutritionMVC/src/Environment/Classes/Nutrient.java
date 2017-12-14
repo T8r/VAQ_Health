@@ -11,7 +11,7 @@ package Environment.Classes;
  */
 public class Nutrient implements Comparable<Nutrient>{
 	private String name;
-	private String category;    // proteins, fats, grains, dairy, etc.
+        private String category;    // proteins, fats, grains, dairy, etc.
 	private String categoryId;  
 	private String servinUnit;  // grams
 	private double baseCalories; // per bas portion

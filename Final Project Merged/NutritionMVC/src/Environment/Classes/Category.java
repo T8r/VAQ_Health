@@ -12,11 +12,11 @@ package Environment.Classes;
 public class Category {
 
 
-	private String id;
+	private int id;
 	private String name;
         private int categoriyCalories;
 
-    public Category(String id, String name, int categoriyCalories) {
+    public Category(int id, String name, int categoriyCalories) {
         this.id = id;
         this.name = name;
         this.categoriyCalories = categoriyCalories;
@@ -26,14 +26,14 @@ public class Category {
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

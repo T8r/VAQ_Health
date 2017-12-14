@@ -57,6 +57,52 @@ public class AllNutrientsModel {
         return _foodgroups;
     }
     
+    public static boolean userHasFood(int profileId, int foodId){
+        int alreadyExists = 0;
+        
+        try (PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM userfoods WHERE userId = ? AND foodId = ?"))
+        {
+            statement.setInt(1, profileId);
+            statement.setInt(2, foodId);
+            
+            try (ResultSet set = statement.executeQuery())
+            {
+                if (set.next())
+                    alreadyExists = set.getInt(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Could not retrieve count of food groups");
+        }
+        
+        return (alreadyExists <= 0);
+    }
+    
+    public void addFoodtoList(int profileId, int foodId, double amount){
+        
+        if(userHasFood(profileId, foodId))
+            try(PreparedStatement statement = connection.prepareStatement("INSERT INTO userfoods (userId, foodId, amount) VALUES (?, ?, ?)")){
+                statement.setInt(1, profileId);
+                statement.setInt(2, foodId);
+                statement.setDouble(3, amount);
+
+                statement.executeUpdate();
+                System.out.println("Food inserted");
+            } catch (SQLException ex) {
+                System.err.println(ex);
+            }
+        else
+            try(PreparedStatement statement = connection.prepareStatement("UPDATE userfoods SET amount = ? WHERE userId = ? AND foodId = ?")){
+                statement.setDouble(1, amount);
+                statement.setInt(2, profileId);
+                statement.setInt(3, foodId);
+                
+                statement.executeUpdate();
+                System.out.println("Food updated");
+            } catch (SQLException ex) {
+                System.err.println(ex);
+            }
+    }
+    
     public static ArrayList<Food> retrieveFoodsByGroupId(int groupId){
         ArrayList<Food> _foods = new ArrayList<>();
         
@@ -67,7 +113,7 @@ public class AllNutrientsModel {
             try (ResultSet set = statement.executeQuery())
             {
                 while(set.next())
-                    _foods.add(new Food(set.getInt(1), set.getString(2), set.getInt(3), set.getString(4), set.getDouble(5), set.getDouble(6), set.getDouble(7), set.getDouble(8), set.getDouble(9), set.getDouble(10), set.getDouble(11)));
+                    _foods.add(new Food(set.getInt(1), set.getString(2), set.getDouble(5) ,set.getInt(3), set.getString(4), set.getDouble(6), set.getDouble(7), set.getDouble(8), set.getDouble(9), set.getDouble(10), set.getDouble(11), set.getDouble(12)));
             }
         } catch (SQLException ex) {
             System.out.println("Could not retrieve all foods from group " + groupId);
@@ -108,9 +154,5 @@ public class AllNutrientsModel {
         }
         
         return totalFoods;
-    }
-    
-    public static void addFoodtoMyList(Food f){
-        
     }
 }

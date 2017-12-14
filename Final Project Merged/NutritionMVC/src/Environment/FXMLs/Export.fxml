@@ -23,13 +23,13 @@
                   </Label>
                </children>
             </AnchorPane>
-            <ScrollPane layoutX="161.0" layoutY="106.0" prefHeight="472.0" prefWidth="800.0">
+            <ScrollPane layoutX="161.0" layoutY="106.0" prefHeight="760.0" prefWidth="800.0">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="691.0" prefWidth="784.0" style="-fx-background-color: white;">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="803.0" prefWidth="784.0" style="-fx-background-color: white;">
                      <children>
                         <AnchorPane layoutX="58.0" layoutY="11.0" prefHeight="433.0" prefWidth="678.0" style="-fx-background-color: white; -fx-background-radius: 5;">
                            <children>
-                              <JFXButton buttonType="RAISED" layoutX="274.0" layoutY="320.0" onMouseClicked="#Export" prefHeight="48.0" prefWidth="149.0" style="-fx-background-color: orange;" styleClass="Header"  text="Export" textFill="WHITE">
+                              <JFXButton buttonType="RAISED" layoutX="274.0" layoutY="320.0" onMouseClicked="#Export" prefHeight="48.0" prefWidth="149.0" style="-fx-background-color: orange;" styleClass="Header" text="Export" textFill="WHITE">
                                  <font>
                                     <Font size="22.0" />
                                  </font>
@@ -57,7 +57,7 @@
                               <Label fx:id="errorL" alignment="CENTER" contentDisplay="CENTER" layoutX="274.0" layoutY="268.0" prefHeight="17.0" prefWidth="149.0" textFill="RED" AnchorPane.bottomAnchor="148.0" AnchorPane.leftAnchor="274.0" AnchorPane.rightAnchor="255.0" AnchorPane.topAnchor="268.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="emailPane" layoutX="58.0" layoutY="455.0" prefHeight="222.0" prefWidth="683.0" style="-fx-background-color: #e9e9e9;" />
+                        <AnchorPane fx:id="emailPane" layoutX="58.0" layoutY="455.0" prefHeight="380.0" prefWidth="683.0" style="-fx-background-color: #e9e9e9;" />
                      </children>
                   </AnchorPane>
               </content>

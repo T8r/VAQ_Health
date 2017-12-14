@@ -6,8 +6,14 @@
 package Environment.Models;
 
 import Environment.Classes.Category;
+import Environment.Classes.Food;
 import Environment.Classes.Nutrient;
-import java.util.Collections;
+import Environment.Database.Database;
+import Environment.MainApplication;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
@@ -24,17 +30,20 @@ public class CalorieModel {
     //fruit
     //milk, yoghurt, cheese and/or alternatives
     //lean meat, fish, poultry, eggs, nuts and legumes.
-
+    static Database instance = MainApplication.getDatabase();
+    
+    static Connection connection = instance.getMyConnection();
+    Statement myStat = instance.getMyStatement();
     private ObservableList<Category> foodCategories   = FXCollections.observableArrayList();
-    private ObservableList<Nutrient> foodNutrients    = FXCollections.observableArrayList();
-    private ObservableList<Nutrient> userPlate        = FXCollections.observableArrayList();
+    private ObservableList<Food> foodNutrients    = FXCollections.observableArrayList();
+    private ObservableList<Food> userPlate        = FXCollections.observableArrayList();
 
     public CalorieModel() {
         // hard-coded for testing
         foodNutrients.clear();
     }
 
-    public void addNutrientToPlate(Nutrient n) {
+    public void addNutrientToPlate(Food n) {
         // add only unique items..
         int found = getPlate().indexOf(n);
         if (getPlate().indexOf(n) != -1) 
@@ -46,47 +55,68 @@ public class CalorieModel {
             getPlate().add(n);
     }
 
-    public ObservableList<Nutrient> getCategoryChoices(Category selectedCat) {
+    public ObservableList<Food> getCategoryChoices(Category selectedCat) {
         // get the nutrients from database based on the cat selected
         // hard coded for now
-        if (selectedCat.getName().equalsIgnoreCase("Grains-Breads")) {
+        if (selectedCat.getName().equalsIgnoreCase("Vegetables")) {
             getMyNutrients().clear();
-            getMyNutrients().add(new Nutrient("Rice", "Grains-Breads", "1", "grams", 150, 100));
-            getMyNutrients().add(new Nutrient("Wheat", "Grains-Breads", "1", "grams", 150, 200));
-            getMyNutrients().add(new Nutrient("Oat", "Grains-Breads", "1", "grams", 150, 300));
-            getMyNutrients().add(new Nutrient("Barley", "Grains-Breads", "1", "grams", 150, 400));
-        } else if (selectedCat.getName().equalsIgnoreCase("Vegetables")) {
+            try{
+                ResultSet set = myStat.executeQuery("SELECT * FROM foods WHERE groupId = 1;");
+                    while(set.next())
+                        getMyNutrients().add(new Food(set.getInt(1), set.getString(2), set.getDouble(5) ,set.getInt(3), set.getString(4), set.getDouble(6), set.getDouble(7), set.getDouble(8), set.getDouble(9), set.getDouble(10), set.getDouble(11), set.getDouble(12)));
+            } catch (SQLException exc) {
+                    exc.printStackTrace();
+            }
+        } else if (selectedCat.getName().equalsIgnoreCase("Wholemeal")) {
             getMyNutrients().clear();
-            getMyNutrients().add(new Nutrient("cauliflower", "Vegetables", "2", "grams", 250, 100));
-            getMyNutrients().add(new Nutrient("broccoli", "Vegetables", "2", "grams", 250, 200));
-            getMyNutrients().add(new Nutrient("beans", "Vegetables", "2", "grams", 250, 300));
-            getMyNutrients().add(new Nutrient("peas", "Vegetables", "2", "grams", 250, 400));
-
-        } else if (selectedCat.getName().equalsIgnoreCase("Fruits")) {
+            try{
+                ResultSet set = myStat.executeQuery("SELECT * FROM foods WHERE groupId = 2;");
+                    while(set.next())
+                        getMyNutrients().add(new Food(set.getInt(1), set.getString(2), set.getDouble(5) ,set.getInt(3), set.getString(4), set.getDouble(6), set.getDouble(7), set.getDouble(8), set.getDouble(9), set.getDouble(10), set.getDouble(11), set.getDouble(12)));
+            } catch (SQLException exc) {
+                    exc.printStackTrace();
+            }
+        } else if (selectedCat.getName().equalsIgnoreCase("Milk")) {
             getMyNutrients().clear();
-            getMyNutrients().add(new Nutrient("orange", "Fruits", "3", "grams", 350, 100));
-            getMyNutrients().add(new Nutrient("peaches", "Fruits", "3", "grams", 350, 200));
-            getMyNutrients().add(new Nutrient("apples", "Fruits", "3", "grams", 350, 300));
-            getMyNutrients().add(new Nutrient("melone", "Fruits", "3", "grams", 350, 400));
-
-        } else if (selectedCat.getName().equalsIgnoreCase("Dairy")) {
+            try{
+                ResultSet set = myStat.executeQuery("SELECT * FROM foods WHERE groupId = 3;");
+                    while(set.next())
+                        getMyNutrients().add(new Food(set.getInt(1), set.getString(2), set.getDouble(5) ,set.getInt(3), set.getString(4), set.getDouble(6), set.getDouble(7), set.getDouble(8), set.getDouble(9), set.getDouble(10), set.getDouble(11), set.getDouble(12)));
+            } catch (SQLException exc) {
+                    exc.printStackTrace();
+            }
+        } else if (selectedCat.getName().equalsIgnoreCase("Meat")) {
             getMyNutrients().clear();
-            getMyNutrients().add(new Nutrient("milk", "Dairy", "4", "grams", 450, 100));
-            getMyNutrients().add(new Nutrient("cheese", "Dairy", "4", "grams", 450, 200));
-            getMyNutrients().add(new Nutrient("yogurt", "Dairy", "4", "grams", 450, 300));
-            getMyNutrients().add(new Nutrient("icecream", "Dairy", "4", "grams", 450, 400));
-
-        } else if (selectedCat.getName().equalsIgnoreCase("Meats")) {
+            try{
+                ResultSet set = myStat.executeQuery("SELECT * FROM foods WHERE groupId = 4;");
+                    while(set.next())
+                        getMyNutrients().add(new Food(set.getInt(1), set.getString(2), set.getDouble(5) ,set.getInt(3), set.getString(4), set.getDouble(6), set.getDouble(7), set.getDouble(8), set.getDouble(9), set.getDouble(10), set.getDouble(11), set.getDouble(12)));
+            } catch (SQLException exc) {
+                    exc.printStackTrace();
+            }
+        } else if (selectedCat.getName().equalsIgnoreCase("Fats")) {
             getMyNutrients().clear();
-            getMyNutrients().add(new Nutrient("fish", "Meats", "5", "grams", 550, 100));
-            getMyNutrients().add(new Nutrient("chicken", "Meats", "5", "grams", 550, 200));
-            getMyNutrients().add(new Nutrient("beef", "Meats", "5", "grams", 550, 300));
-            getMyNutrients().add(new Nutrient("lamb", "Meats", "5", "grams", 550, 400));
+            try{
+                ResultSet set = myStat.executeQuery("SELECT * FROM foods WHERE groupId = 5;");
+                    while(set.next())
+                        getMyNutrients().add(new Food(set.getInt(1), set.getString(2), set.getDouble(5) ,set.getInt(3), set.getString(4), set.getDouble(6), set.getDouble(7), set.getDouble(8), set.getDouble(9), set.getDouble(10), set.getDouble(11), set.getDouble(12)));
+            } catch (SQLException exc) {
+                    exc.printStackTrace();
+            }
+        } else if (selectedCat.getName().equalsIgnoreCase("Junk")) {
+            getMyNutrients().clear();
+            try{
+                ResultSet set = myStat.executeQuery("SELECT * FROM foods WHERE groupId = 6;");
+                    while(set.next())
+                        getMyNutrients().add(new Food(set.getInt(1), set.getString(2), set.getDouble(5) ,set.getInt(3), set.getString(4), set.getDouble(6), set.getDouble(7), set.getDouble(8), set.getDouble(9), set.getDouble(10), set.getDouble(11), set.getDouble(12)));
+            } catch (SQLException exc) {
+                    exc.printStackTrace();
+            }
         }
         return (this.getMyNutrients());
     }
 
-    public void removeNutrientFromPlate(Nutrient n) {
+    public void removeNutrientFromPlate(Food n) {
         int found = getPlate().indexOf(n);
         if (getPlate().indexOf(n) != -1) {
             getPlate().remove(found);
@@ -114,11 +144,10 @@ public class CalorieModel {
         
         if(getPlate() != null && getPlate().size()!=0)
         {
-            FXCollections.sort(getPlate());
             if (catFlag ==false)
             {
                 for (int i = 0; i < getPlate().size(); i++) {
-                    pieChartData1.add(new PieChart.Data(getPlate().get(i).getName(), getPlate().get(i).getActualCalories()));
+                    pieChartData1.add(new PieChart.Data(getPlate().get(i).getName(), getPlate().get(i).getCalories()));
                 }
                 return pieChartData1;
             }
@@ -127,12 +156,12 @@ public class CalorieModel {
                 // inefficient..switch to hashing once working...
                 for (int i = 0; i < getPlate().size(); i++) 
                 {
-                    String cat = getPlate().get(i).getCategory();
+                    int cat = getPlate().get(i).getGroupId();
                     for (int j = 0; j < foodCategories.size(); j++) {
-                        if(foodCategories.get(j).getName().compareTo(cat)==0)
+                        if(foodCategories.get(j).getId() == cat)
                         {
                             foodCategories.get(j).setCategoriyCalories
-                                    ((int) (foodCategories.get(j).getCategoriyCalories()+getPlate().get(i).getActualCalories()));
+                                    ((int) (foodCategories.get(j).getCategoriyCalories()+getPlate().get(i).getCalories()));
                         }
                              
                     }
@@ -154,11 +183,12 @@ public class CalorieModel {
         foodCategories.clear();
 
         // Get & populate from database
-        foodCategories.add(new Category("1", "Grains-Breads",0));
-        foodCategories.add(new Category("2", "Vegetables",0));
-        foodCategories.add(new Category("3", "Fruits",0));
-        foodCategories.add(new Category("4", "Dairy",0));
-        foodCategories.add(new Category("5", "Meats",0));
+        foodCategories.add(new Category(1, "Vegetables",0));
+        foodCategories.add(new Category(2, "Wholemeal",0));
+        foodCategories.add(new Category(3, "Milk",0));
+        foodCategories.add(new Category(4, "Meat",0));
+        foodCategories.add(new Category(5, "Fats",0));
+        foodCategories.add(new Category(6, "Junk",0));
         return foodCategories;
     }
 
@@ -176,35 +206,35 @@ public class CalorieModel {
         this.foodCategories = myCategories;
     }
 
-    public Nutrient gerNutrientChoices(Nutrient n1) {
+    public Food gerNutrientChoices(Food n1) {
         return n1;
     }
 
     /**
      * @return the plate
      */
-    public ObservableList<Nutrient> getPlate() {
+    public ObservableList<Food> getPlate() {
         return userPlate;
     }
 
     /**
      * @param plate the plate to set
      */
-    public void setPlate(ObservableList<Nutrient> plate) {
+    public void setPlate(ObservableList<Food> plate) {
         this.userPlate = plate;
     }
 
     /**
      * @return the myNutrients
      */
-    public ObservableList<Nutrient> getMyNutrients() {
+    public ObservableList<Food> getMyNutrients() {
         return foodNutrients;
     }
 
     /**
      * @param myNutrients the myNutrients to set
      */
-    public void setMyNutrients(ObservableList<Nutrient> myNutrients) {
+    public void setMyNutrients(ObservableList<Food> myNutrients) {
         this.foodNutrients = myNutrients;
     }
 

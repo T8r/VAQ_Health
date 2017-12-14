@@ -6,6 +6,7 @@
 package Environment.Controllers;
 
 import Environment.Classes.Category;
+import Environment.Classes.Food;
 import Environment.Classes.Nutrient;
 import Environment.Models.CalorieModel;
 import Environment.Views.CalorieView;
@@ -26,7 +27,7 @@ public class CalorieController {
     private CalorieModel Model; 
     private CalorieView  View;
     Category category;
-    Nutrient nutrient;
+    Food nutrient;
 
     public CalorieController(CalorieModel Model, CalorieView View) 
     {
@@ -52,7 +53,7 @@ public class CalorieController {
                 if ( category != null){
 		    System.out.println("Catgory changed to:" + category.toString());
                     // get model to get nutirents of the category captured.
-                    ObservableList<Nutrient> myNutrients = getModel().getCategoryChoices(c1);
+                    ObservableList<Food> myNutrients = getModel().getCategoryChoices(c1);
                     getView().reDrawCalorieView2(myNutrients);
                 }
 		
@@ -60,14 +61,14 @@ public class CalorieController {
         });
 	    
 	// When nutrient is selected, update the nutirent calories/portions/etc.
-	getView().getCategoryChoices().valueProperty().addListener(new ChangeListener<Nutrient>() {
+	getView().getCategoryChoices().valueProperty().addListener(new ChangeListener<Food>() {
             @Override 
-            public void changed(ObservableValue ov, Nutrient n, Nutrient n1) {                
+            public void changed(ObservableValue ov, Food n, Food n1) {                
                 nutrient = n1; 
                 if ( nutrient != null){
-		System.out.println("nutrient changed to:" + nutrient.toString());
+		System.out.println("nutrient changed to:" + nutrient.getName());
                     // get model to get nutirents of the category captured.
-                    Nutrient myNutrient = getModel().gerNutrientChoices(n1);
+                    Food myNutrient = getModel().gerNutrientChoices(n1);
                     getView().reDrawCalorieView3(myNutrient);
                 }
 		
@@ -77,12 +78,12 @@ public class CalorieController {
             public void changed(ObservableValue<? extends Number> ov,
                 Number old_val, Number new_val) {
                    //do the math for nutrient calories, based on portion calories and unit
-                    Nutrient currentN = getView().getCurrentNutrient();
+                    Food currentN = getView().getCurrentNutrient();
                     if(currentN != null)
                     {
-                        int totalCalories = (int) ((new_val.intValue() / currentN.getBasePortion()) * currentN.getBaseCalories()); 
+                        int totalCalories = (int) ((new_val.intValue() / currentN.getServingSize()) * currentN.getServingSize()); 
                         getView().getTotalCalories().setText((Integer.toString(totalCalories))); 
-                        currentN.setActualCalories(totalCalories);
+                        currentN.setCalories(totalCalories);
                     }
                     else
                     {
@@ -107,7 +108,7 @@ public class CalorieController {
            public void handle(ActionEvent event) {
            //
            // update plate nutrients
-           Nutrient currentNut= getView().getCurrentNutrient();
+           Food currentNut= getView().getCurrentNutrient();
            if(currentNut !=null)
                 getModel().removeNutrientFromPlate(currentNut);
            
@@ -138,7 +139,7 @@ public class CalorieController {
            public void handle(ActionEvent event) {
            //
            // update plate nutrients
-           Nutrient currentNut= getView().getCurrentNutrient();
+           Food currentNut= getView().getCurrentNutrient();
            if(currentNut !=null)
                 getModel().addNutrientToPlate(currentNut);
            

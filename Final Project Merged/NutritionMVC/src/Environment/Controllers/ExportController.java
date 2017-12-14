@@ -6,7 +6,9 @@
 package Environment.Controllers;
 
 import Environment.Core.SaveProfile;
+import Environment.Models.jEmailModel;
 import Environment.Tabs.TabManager;
+import Environment.Views.jEmailView;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -59,7 +61,18 @@ public class ExportController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-       
+          jEmailModel model = new jEmailModel();
+        model.setHost("smtp.gmail.com");
+        model.setPassword("utrgvcssw");
+        model.setPort("465");
+        model.setSubject("Sending File");
+        model.setToAddress("");
+        model.setUserName("softwareengineeringutrgv@gmail.com");
+        model.setMessage("File sent.");
+        model.setFile("bla.txt");
+        jEmailView root = new jEmailView();
+        jEmailController controller = new jEmailController(root, model);
+        emailPane.getChildren().add(root);
     }
 
     @FXML

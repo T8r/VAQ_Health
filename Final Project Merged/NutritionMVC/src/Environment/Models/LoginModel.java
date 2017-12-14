@@ -254,10 +254,10 @@ public class LoginModel {
                     + "heightInches = ? "
                     + "where userID = ?"
             );
-            ps.setInt(1, 1);
-            ps.setInt(2,1);
-            ps.setInt(3, 1);
-            ps.setInt(4,1);
+            ps.setInt(1, Integer.parseInt(profile.medical.getWeight()));
+            ps.setInt(2,Integer.parseInt(profile.medical.getHeightFt()));
+            ps.setInt(3, Integer.parseInt(profile.medical.getHeightInches()));
+            ps.setInt(4,profile.id);
             
             try{
                 ps.executeUpdate();
@@ -837,14 +837,15 @@ public class LoginModel {
                 equipment.setDescription(myRs.getString("Description"));
                 equipment.setPrimaryMuscle(myRs.getString("Primary Muscle"));
                 equipment.setPrimaryMuscle(myRs.getString("Secondary Muscle"));
-                Blob b = myRs.getBlob("image");
-                byte[] byteImage = b.getBytes(1, (int) b.length());
-                Image equipmentImg = new Image(new ByteArrayInputStream(byteImage));
-                equipment.setImage(equipmentImg);
+               
+                String imageFileName = "";
+                imageFileName = myRs.getString("Image");              
+                equipment.setImage(new Image("resources/images/Equipment/"+imageFileName));    
+                System.out.println(imageFileName);
             }
             
         } catch (Exception exc) {
-            exc.printStackTrace();
+            System.out.println(exc.getMessage());
         }
         return equipment;
     }

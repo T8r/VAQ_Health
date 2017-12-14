@@ -6,6 +6,7 @@
 package Environment.Views;
 
 import Environment.Classes.Category;
+import Environment.Classes.Food;
 import Environment.Classes.Nutrient;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -69,7 +70,7 @@ public class CalorieView extends VBox{
 
      //Plate & current food selection
      private ObservableList<Category> foodCategories = FXCollections.observableArrayList();
-     private Nutrient currentNutrient;
+     private Food currentNutrient;
      
     HBox buttonsBox = new HBox();
     private ToggleGroup plateDisplaygroup = new ToggleGroup();
@@ -102,11 +103,12 @@ public class CalorieView extends VBox{
 	// Need Drop Down List
 	foodCategories.clear();
 	// Get & populate from database
-	foodCategories.add( new Category("1","Grains-Breads",0));
-	foodCategories.add( new Category("2","Vegetables",0));
-	foodCategories.add( new Category("3","Fruits",0));
-	foodCategories.add( new Category("4","Dairy",0));
-	foodCategories.add( new Category("5","Meats",0 ));
+	foodCategories.add( new Category(1,"Vegetables",0));
+	foodCategories.add( new Category(2,"Wholemeal",0));
+	foodCategories.add( new Category(3,"Milk",0));
+	foodCategories.add( new Category(4,"Meat",0));
+	foodCategories.add( new Category(5,"Fats",0 ));
+	foodCategories.add( new Category(5,"Junk",0 ));
         categoriesComboBox.getItems().addAll(foodCategories);
 	categoriesComboBox.setPromptText("Food Categories");
 	
@@ -186,11 +188,12 @@ public class CalorieView extends VBox{
         categoryChoices.getItems().addAll("");
 
 	// Get & populate from database
-	foodCategories.add( new Category("1","Grains-Breads",0));
-	foodCategories.add( new Category("2","Vegetables",0));
-	foodCategories.add( new Category("3","Fruits",0));
-	foodCategories.add( new Category("4","Dairy",0));
-	foodCategories.add( new Category("5","Meats",0 ));
+	foodCategories.add( new Category(1,"Vegetables",0));
+	foodCategories.add( new Category(2,"Wholemeal",0));
+	foodCategories.add( new Category(3,"Milk",0));
+	foodCategories.add( new Category(4,"Meat",0));
+	foodCategories.add( new Category(5,"Fats",0 ));
+	foodCategories.add( new Category(5,"Junk",0 ));
         
         categoriesComboBox.getItems().clear();
         categoriesComboBox.getItems().addAll(foodCategories);
@@ -230,7 +233,7 @@ public class CalorieView extends VBox{
        plateChart.setTitle("Total Calories: "+ Integer.toString(total));
     }
     
-    public void reDrawCalorieView2(ObservableList<Nutrient> selectedCatChoices) 
+    public void reDrawCalorieView2(ObservableList<Food> selectedCatChoices) 
     {
         getCategoryChoices().getItems().clear();
         caloriesPerPortionUnit.setText("");
@@ -240,16 +243,16 @@ public class CalorieView extends VBox{
         getCategoryChoices().getItems().addAll(selectedCatChoices);
     }
     
-    public void reDrawCalorieView3(Nutrient selectedNutrient) 
+    public void reDrawCalorieView3(Food selectedNutrient) 
     {
         // TextField caloriesPerPortionUnit  = new TextField();
         // TextField portion  = new TextField();
         
         setCurrentNutrient(selectedNutrient);
-        String unit=selectedNutrient.getServinUnit();
-        String basePortion  = Double.toString(selectedNutrient.getBasePortion());
-        String baseCalories = Double.toString(selectedNutrient.getBaseCalories());
-        portionSlider.setValue((int)selectedNutrient.getBasePortion());
+        String unit=selectedNutrient.getName();
+        String basePortion  = Double.toString(selectedNutrient.getServingSize());
+        String baseCalories = Double.toString(selectedNutrient.getCalories());
+        portionSlider.setValue((int)selectedNutrient.getServingSize());
         String caloriesPerPortionUnitString =baseCalories+" Cals per "+basePortion+" "+unit;
 
         caloriesPerPortionUnit.setText(caloriesPerPortionUnitString);
@@ -261,7 +264,7 @@ public class CalorieView extends VBox{
 	//start at the base unit
         getPortion().setText(basePortion);
         //stat at base calories
-        getTotalCalories().setText(Double.toString(selectedNutrient.getBaseCalories()));
+        getTotalCalories().setText(Double.toString(selectedNutrient.getCalories()));
         // update currentNutrient as the userr changes portions
     }
     
@@ -401,14 +404,14 @@ public class CalorieView extends VBox{
     /**
      * @return the currentNutrient
      */
-    public Nutrient getCurrentNutrient() {
+    public Food getCurrentNutrient() {
         return currentNutrient;
     }
 
     /**
      * @param currentNutrient the currentNutrient to set
      */
-    public void setCurrentNutrient(Nutrient currentNutrient) {
+    public void setCurrentNutrient(Food currentNutrient) {
         this.currentNutrient = currentNutrient;
     }
 

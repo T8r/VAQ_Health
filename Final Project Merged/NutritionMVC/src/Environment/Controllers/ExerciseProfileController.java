@@ -16,10 +16,15 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.CheckListView;
@@ -43,6 +48,10 @@ public class ExerciseProfileController implements Initializable {
     CheckComboBox exerciseTypeCCB;
     @FXML
     ImageView equipmentIV;
+    @FXML
+    Label primaryMuscleL;
+    @FXML
+    TextArea descriptionTA;
     ArrayList<Equipment> equipmentList;
     
     @Override
@@ -54,6 +63,12 @@ public class ExerciseProfileController implements Initializable {
         exerciseTypeCCB.getItems().add(Exercise.ExerciseTypeE.FLEXIBILITY.toString());
         exerciseTypeCCB.getItems().add(Exercise.ExerciseTypeE.STRENGTH.toString());
         
+        exerciseTypeCCB.getCheckModel().getCheckedItems().addListener(new ListChangeListener<String>() {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends String> c) {
+                UpdateExerciseList();
+            }
+        });
         for (Equipment equipment : equipmentList) {         
             equipmentCCB.getItems().add(equipment);
         }
@@ -62,11 +77,26 @@ public class ExerciseProfileController implements Initializable {
              @Override
              public void changed(ObservableValue<? extends Equipment> observable, Equipment oldValue, Equipment equipment) {
                  equipmentIV.setImage(equipment.getImage());
+                 descriptionTA.setText(equipment.getDescription());
+                 primaryMuscleL.setText("Primary Muscle : " + equipment.getPrimaryMuscle() +"\nSecondary Muscle : " + equipment.getSecondaryMuscle());
              }
            
         });   
          DisplayExerciseProfile();
     }  
+    
+    private void UpdateExerciseList() {
+        ObservableList<Exercise.ExerciseTypeE> exerciseTypeList = exerciseTypeCCB.getCheckModel().getCheckedItems();
+        ArrayList<Equipment> filterdList = new ArrayList();
+        for (int i = 0; i < equipmentList.size(); i++) {
+            if (exerciseTypeList.contains(equipmentList.get(i).getType().toString())) {
+                filterdList.add(equipmentList.get(i));
+            }
+            
+        }
+        equipmentCCB.getItems().clear();
+        equipmentCCB.setItems(FXCollections.observableList(filterdList));
+    }
     
     private void DisplayExerciseProfile() {
 
